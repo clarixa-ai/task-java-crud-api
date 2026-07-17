@@ -1,8 +1,19 @@
 {
-  "name": "Clarixa Java Task",
+  "name": "Clarixa – Java Task",
   "image": "mcr.microsoft.com/devcontainers/java:21",
-  "hostRequirements": { "cpus": 2 },
-  "customizations": { "vscode": { "extensions": [] } },
-  "postCreateCommand": "echo 'Clarixa · Java task ready'",
-  "postAttachCommand": "code CLARIXA_TASK.md"
+  "hostRequirements": {
+    "cpus": 2
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "vscjava.vscode-java-pack",
+        "clarixa-ai.clarixa"
+      ],
+      "settings": {
+        "java.compile.nullAnalysis.mode": "automatic"
+      }
+    }
+  },
+  "postCreateCommand": "curl -sf \"https://api.clarixa.org/api/extension/claim-launch?githubUser=${GITHUB_USER}\" -o CLARIXA_TASK.json 2>/dev/null && echo 'Clarixa task loaded.' || echo 'No pending Clarixa task — use Setup Task command in VS Code.'"
 }
